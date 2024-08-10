@@ -33,3 +33,18 @@ export const Message = styled.p`
   margin-top: 1rem;
   color: ${({ success }) => (success ? "green" : "red")};
 `;
+
+export const StyledButton = styled.button`
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;

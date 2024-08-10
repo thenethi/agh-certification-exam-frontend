@@ -11,7 +11,7 @@ import {
   SubmitButton,
   ErrorMessage,
   PhoneInputContainer,
-} from './StyledComponents';
+} from '../../StyledComponents';
 
 import countries from '../data/country.json';
 import states from '../data/states.json';
@@ -54,14 +54,7 @@ const RegistrationForm = () => {
       city: selectedCity?.city_name,
     };
 
-    console.log(submissionData)
-
-    // Determine the price based on the exam type
-    const price = data.examType === 'offline' ? 500 : 300;
-
-    // Navigate to the payment page with submission data and price
-    reset()
-    navigate('/payment', { state: { submissionData, price } });
+    navigate('/exam-details', { state: { submissionData: submissionData } });
   };
 
   return (
@@ -115,6 +108,60 @@ const RegistrationForm = () => {
             />
           </PhoneInputContainer>
           {errors.mobileNumber && <ErrorMessage>{errors.mobileNumber.message}</ErrorMessage>}
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Date of Birth</Label>
+          <Input
+            type="date"
+            {...register('dateOfBirth', { required: 'Date of Birth is required' })}
+          />
+          {errors.dateOfBirth && <ErrorMessage>{errors.dateOfBirth.message}</ErrorMessage>}
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Gender</Label>
+          <Select {...register('gender', { required: 'Gender is required' })}>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </Select>
+          {errors.gender && <ErrorMessage>{errors.gender.message}</ErrorMessage>}
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Education Level</Label>
+          <Input
+            {...register('educationLevel', { required: 'Education Level is required' })}
+            placeholder="Enter your education level"
+          />
+          {errors.educationLevel && <ErrorMessage>{errors.educationLevel.message}</ErrorMessage>}
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Specialization/Field of Study</Label>
+          <Input
+            {...register('specialization', { required: 'Specialization is required' })}
+            placeholder="Enter your specialization"
+          />
+          {errors.specialization && <ErrorMessage>{errors.specialization.message}</ErrorMessage>}
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Current Institution (if applicable)</Label>
+          <Input
+            {...register('currentInstitution')}
+            placeholder="Enter your current institution"
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Enrollment Number (for students)</Label>
+          <Input
+            {...register('enrollmentNumber')}
+            placeholder="Enter your enrollment number"
+          />
         </FormGroup>
 
         <FormGroup>
@@ -176,7 +223,7 @@ const RegistrationForm = () => {
           </>
         )}
 
-        <SubmitButton type="submit">Submit</SubmitButton>
+        <SubmitButton type="submit">Proceed to Exam Details</SubmitButton>
       </form>
     </FormContainer>
   );
