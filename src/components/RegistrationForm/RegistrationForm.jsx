@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import ReactFlagsSelect from 'react-flags-select';
 import {
   FormContainer,
@@ -11,6 +11,7 @@ import {
   SubmitButton,
   ErrorMessage,
   PhoneInputContainer,
+  Title
 } from '../../StyledComponents';
 
 import countries from '../data/country.json';
@@ -18,12 +19,12 @@ import states from '../data/states.json';
 import cities from '../data/cities.json';
 
 const RegistrationForm = () => {
-  const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm();
+  const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
   const [selectedStates, setSelectedStates] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
   const [selectedCountryCode, setSelectedCountryCode] = useState('');
   const navigate = useNavigate();
-
+  const { examId } = useParams();
   const examType = watch('examType');
 
   const handleCountryChange = (e) => {
@@ -40,25 +41,24 @@ const RegistrationForm = () => {
   };
 
   const onSubmit = (data) => {
+    console.log(data)
     const selectedCountry = countries.find(country => country.sortname === selectedCountryCode);
     const formattedPhoneNumber = `+${selectedCountry?.phonecode || ''}${data.mobileNumber}`;
-
-    const selectedState = states.find(state => state.state_id === data.state);
-    const selectedCity = selectedCities.find(city => city.city_id === data.city);
-
-    const submissionData = {
+    // Combine all the data into a single object
+    const combinedData = {
       ...data,
-      mobileNumber: formattedPhoneNumber,
-      country: selectedCountry?.country_name,
-      state: selectedState?.state_name,
-      city: selectedCity?.city_name,
+      phoneNumber: formattedPhoneNumber,
+      country: selectedCountry?.country_name || '',
     };
-
-    navigate('/exam-details', { state: { submissionData: submissionData } });
+  
+    console.log(combinedData); 
+    navigate(`/exam-details/${examId}`, { state: { submissionData: combinedData } });
   };
+  
 
   return (
     <FormContainer>
+      <Title>User Registration</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Label>Full Name</Label>

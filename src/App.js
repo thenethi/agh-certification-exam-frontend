@@ -9,23 +9,34 @@ import ExamScheduling from "./components/ExamScheduling/ExamScheduling";
 import CandidatePreparation from "./components/CandidatePreparation/CandidatePreparation";
 import ExamAdministration from "./components/ExamAdministration/ExamAdministration";
 import ResultsFeedback from "./components/ResultsFeedback/ResultsFeedback";
+import HomePage from "./components/HomePage/HomePage";
+import ExamsAvailable from "./components/ExamsAvailable/ExamsAvailable";
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<RegistrationForm />} />
-        <Route path="/exam-details" element={<ExamDetails />} />
-        <Route path="/certificate-details" element={<CertificationDetails />} />
-        <Route path="/exam-content" element={<ExamContent />} />
-        <Route path="/exam-scheduling" element={<ExamScheduling />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/exams-available" element={<ExamsAvailable />} />
+        <Route path="/register/:examId" element={<RegistrationForm />} />
+        <Route path="/exam-details/:examId" element={<ExamDetails />} />
         <Route
-          path="/candidate-preparation"
+          path="/certificate-details/:examId"
+          element={<CertificationDetails />}
+        />
+        <Route path="/exam-content/:examId" element={<ExamContent />} />
+        <Route path="/exam-scheduling/:examId" element={<ExamScheduling />} />
+        <Route
+          path="/candidate-preparation/:examId"
           element={<CandidatePreparation />}
         />
-        <Route path="/exam-administration" element={<ExamAdministration />} />
-        <Route path="/results-feedback" element={<ResultsFeedback />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route
+          path="/exam-administration/:examId"
+          element={<ExamAdministration />}
+        />
+        <Route path="/results-feedback/:examId" element={<ResultsFeedback />} />
+        <Route path="/payment/:examId" element={<Payment />} />
       </Routes>
     </Router>
   );

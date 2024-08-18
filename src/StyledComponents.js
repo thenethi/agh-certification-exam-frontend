@@ -1,13 +1,79 @@
-// StyledComponents.js
 import styled from "styled-components";
 
+// Colors
+const darkBlue = "#0d1430";
+const white = "#ffffff";
+const lightGray = "#f9f9f9";
+const gray = "#666";
+const hoverBlue = "#0056b3";
+const successGreen = "#28a745";
+const dangerRed = "#dc3545";
+
+// Hero Section Styles
+export const HeroSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${darkBlue};
+  color: ${white};
+  height: 100vh; /* Full viewport height */
+  text-align: center;
+`;
+
+export const HeroTitle = styled.h1`
+  font-size: 3rem;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem; /* Adjusted for tablets */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem; /* Adjusted for mobile */
+  }
+`;
+
+export const HeroDescription = styled.p`
+  font-size: 1.2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.05rem; /* Adjusted for tablets */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem; /* Adjusted for mobile */
+  }
+`;
+
+// Page Container
+export const PageContainer = styled.div`
+  margin: 0px;
+`;
+
+// Heading
+export const Heading = styled.h1`
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  color: ${darkBlue};
+`;
+
+// Form Container
 export const FormContainer = styled.div`
   max-width: 600px;
   margin: 0 auto;
   padding: 30px;
-  background-color: #ffffff;
+  background-color: ${white};
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+export const Title = styled.h1`
+  padding: 10px;
+  margin: 10px;
+  font-size: 1.5rem;
+  color: ${darkBlue};
 `;
 
 export const FormGroup = styled.div`
@@ -66,15 +132,33 @@ export const SubmitButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: ${hoverBlue};
   }
 `;
 
 export const ErrorMessage = styled.span`
-  color: #dc3545;
+  color: ${dangerRed};
   font-size: 14px;
   margin-top: 5px;
   display: block;
+`;
+
+export const SuccessMessage = styled.div`
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  color: #155724;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
 `;
 
 export const PhoneInputContainer = styled.div`
@@ -101,20 +185,90 @@ export const PhoneInputContainer = styled.div`
   }
 `;
 
-export const SuccessMessage = styled.div`
-  margin-top: 20px;
+// Tile Components
+export const TileContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 30px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); /* Two tiles per row on desktop */
+  }
+
+  @media (max-width: 1023px) and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* Two tiles per row on tablets */
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr; /* One tile per row on mobile devices */
+  }
+`;
+
+export const Tile = styled.div`
+  background-color: ${lightGray};
+  border: 1px solid #ddd;
+  border-radius: 10px;
   padding: 20px;
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
-  border-radius: 4px;
-  color: #155724;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+`;
 
-  h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
+export const TileHeading = styled.h2`
+  font-size: 1.5rem;
+  color: ${darkBlue};
+  margin-bottom: 10px;
+`;
 
-  p {
-    margin: 5px 0;
+export const TileDescription = styled.p`
+  font-size: 1rem;
+  color: ${gray};
+  margin-bottom: 20px;
+`;
+
+export const Button = styled.button`
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${hoverBlue};
   }
+`;
+
+export const ExamTile = styled.div`
+  background-color: ${lightGray};
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+`;
+
+export const TileDetails = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+export const DetailItem = styled.p`
+  width: 45%;
+  margin: 5px 0;
+  color: ${gray};
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const Subtitle = styled.h2`
+  font-size: 1.25rem;
+  color: ${gray};
+  margin-top: 10px;
+  font-weight: 400;
+  text-align: center;
 `;
