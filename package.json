@@ -12,10 +12,12 @@
     "react-dom": "^18.3.1",
     "react-flags-select": "^2.2.3",
     "react-hook-form": "^7.52.2",
+    "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.26.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
     "react-transition-group": "^4.4.5",
+    "sonar-scanner": "^3.1.0",
     "styled-components": "^6.1.12",
     "web-vitals": "^2.1.4"
   },
@@ -23,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sonar": "sonar-scanner"
   },
   "eslintConfig": {
     "extends": [

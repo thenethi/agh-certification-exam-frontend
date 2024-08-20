@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
 import {
   TileContainer,
   Tile,
@@ -11,11 +12,13 @@ import {
   HeroTitle,
   HeroDescription,
   PageContainer,
-  Title
+  Title,
+  LoaderContainer
 } from "../../StyledComponents";
 
-const ExamTilePage = () => {
+const HomePage = () => {
   const [companies, setCompanies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,9 +39,11 @@ const ExamTilePage = () => {
         });
 
         setCompanies(Object.values(companyMap));
+        setIsLoading(false);
       })
       .catch(error => {
         console.error("Error fetching exam details:", error);
+        setIsLoading(false);
       });
   }, []);
 
@@ -55,19 +60,31 @@ const ExamTilePage = () => {
         </HeroDescription>
       </HeroSection>
       <Title>Kickstart Your Career with Our Expert-Curated Assessments</Title>
-      <TileContainer>
-        {companies.map((company, index) => (
-          <Tile key={index}>
-            <TileHeading>{company.companyName}</TileHeading>
-            <TileDescription>{company.companyDescription}</TileDescription>
-            <Button onClick={() => handleNavigate(company.exams)}>
-              Take a Certify Exam
-            </Button>
-          </Tile>
-        ))}
-      </TileContainer>
+      {isLoading ? (
+        <LoaderContainer>
+          <RotatingLines
+            strokeColor="blue"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+        </LoaderContainer>
+      ) : (
+        <TileContainer>
+          {companies.map((company, index) => (
+            <Tile key={index}>
+              <TileHeading>{company.companyName}</TileHeading>
+              <TileDescription>{company.companyDescription}</TileDescription>
+              <Button onClick={() => handleNavigate(company.exams)}>
+                Take a Certify Exam
+              </Button>
+            </Tile>
+          ))}
+        </TileContainer>
+      )}
     </PageContainer>
   );
 };
 
-export default ExamTilePage;
+export default HomePage;
